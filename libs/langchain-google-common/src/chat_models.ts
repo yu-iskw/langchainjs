@@ -240,7 +240,14 @@ export abstract class ChatGoogleBase<AuthOptions>
   constructor(fields?: ChatGoogleBaseInput<AuthOptions>) {
     super(ensureParams(fields));
 
+    // DEBUG: Log labels before copyAndValidateModelParamsInto
+    console.log(`🔍 [DEBUG] Constructor - Platform: ${this.constructor.name}, Input fields labels:`, fields?.labels);
+
     copyAndValidateModelParamsInto(fields, this);
+
+    // DEBUG: Log labels after copyAndValidateModelParamsInto
+    console.log(`🔍 [DEBUG] Constructor - Platform: ${this.constructor.name}, After copyAndValidateModelParamsInto labels:`, this.labels);
+
     this.safetyHandler =
       fields?.safetyHandler ?? new DefaultGeminiSafetyHandler();
     this.streamUsage = fields?.streamUsage ?? this.streamUsage;
@@ -334,7 +341,15 @@ export abstract class ChatGoogleBase<AuthOptions>
     options: this["ParsedCallOptions"],
     runManager: CallbackManagerForLLMRun | undefined
   ): Promise<ChatResult> {
+    // DEBUG: Log labels at the start of _generate
+    console.log(`🔍 [DEBUG] _generate - Platform: ${this.platform}, Model labels:`, this.labels);
+    console.log(`🔍 [DEBUG] _generate - Platform: ${this.platform}, Options labels:`, options?.labels);
+
     const parameters = this.invocationParams(options);
+
+    // DEBUG: Log parameters after invocationParams
+    console.log(`🔍 [DEBUG] _generate - Platform: ${this.platform}, Parameters labels:`, parameters.labels);
+
     if (this.streaming) {
       const stream = this._streamResponseChunks(messages, options, runManager);
       let finalChunk: ChatGenerationChunk | null = null;

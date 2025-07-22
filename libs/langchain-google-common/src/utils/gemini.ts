@@ -1801,6 +1801,9 @@ export function getGeminiAPI(config?: GeminiAPIConfig): GoogleAIAPI {
     input: unknown,
     parameters: GoogleAIModelRequestParams
   ): Promise<GeminiRequest> {
+    // DEBUG: Log labels at the start of formatData
+    console.log(`🔍 [DEBUG] Gemini formatData - Input labels:`, parameters.labels);
+
     const typedInput = input as MessageContent | BaseMessage[];
     const contents = await formatContents(typedInput, parameters);
     const generationConfig = formatGenerationConfig(parameters);
@@ -1834,7 +1837,14 @@ export function getGeminiAPI(config?: GeminiAPIConfig): GoogleAIAPI {
     }
     if (parameters.labels && Object.keys(parameters.labels).length > 0) {
       ret.labels = parameters.labels;
+      console.log(`🔍 [DEBUG] Gemini formatData - Added labels to request:`, ret.labels);
+    } else {
+      console.log(`🔍 [DEBUG] Gemini formatData - No labels to add (labels:`, parameters.labels, `)`);
     }
+
+    // DEBUG: Log final request structure
+    console.log(`🔍 [DEBUG] Gemini formatData - Final request has labels:`, 'labels' in ret ? 'YES' : 'NO');
+
     return ret;
   }
 

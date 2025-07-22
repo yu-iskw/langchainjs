@@ -224,7 +224,14 @@ export function copyAIModelParamsInto(
     ret.cachedContent = options.cachedContent;
   }
 
+  // DEBUG: Log labels assignment
+  console.log(`🔍 [DEBUG] copyAIModelParamsInto - options?.labels:`, options?.labels);
+  console.log(`🔍 [DEBUG] copyAIModelParamsInto - params?.labels:`, params?.labels);
+  console.log(`🔍 [DEBUG] copyAIModelParamsInto - target?.labels:`, target?.labels);
+
   ret.labels = options?.labels ?? params?.labels ?? target?.labels;
+
+  console.log(`🔍 [DEBUG] copyAIModelParamsInto - Final ret.labels:`, ret.labels);
 
   return ret;
 }

@@ -1,0 +1,27 @@
+{
+  "name": "test-custom-labels",
+  "version": "1.0.0",
+  "description": "Test examples for custom metadata labels with Vertex AI and Gemini API",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node tests/test-labels.js",
+    "test:vertex": "node tests/test-vertex-ai-labels.js --debug",
+    "test:gemini": "node tests/test-gemini-labels.js --debug"
+  },
+  "dependencies": {
+    "@langchain/google-vertexai": "^0.2.0",
+    "@langchain/google-genai": "^0.2.0",
+    "@langchain/core": "^0.3.0",
+    "dotenv": "^16.3.1"
+  },
+  "keywords": [
+    "langchain",
+    "vertex-ai",
+    "gemini",
+    "labels",
+    "metadata"
+  ],
+  "author": "LangChain Test",
+  "license": "MIT"
+}

@@ -416,12 +416,22 @@ export abstract class GoogleAIConnection<
     options: CallOptions,
     runManager?: BaseRunManager
   ): Promise<ResponseType> {
+    // DEBUG: Log request start with labels
+    console.log(`🔍 [DEBUG] request - Platform: ${this.platform}, Input labels:`, parameters.labels);
+
     const moduleName = this.constructor.name;
     const streamingParameters: GoogleAIModelRequestParams = {
       ...parameters,
       streaming: this.streaming,
     };
     const data = await this.formatData(input, streamingParameters);
+
+    // DEBUG: Log the formatted data before making the request
+    console.log(`🔍 [DEBUG] request - Platform: ${this.platform}, Formatted data has labels:`,
+      data && typeof data === 'object' && 'labels' in data ? 'YES' : 'NO');
+    if (data && typeof data === 'object' && 'labels' in data) {
+      console.log(`🔍 [DEBUG] request - Platform: ${this.platform}, Data labels:`, (data as any).labels);
+    }
 
     await runManager?.handleCustomEvent(`google-request-${moduleName}`, {
       data,
@@ -480,8 +490,20 @@ export abstract class AbstractGoogleLLMConnection<
     input: MessageType,
     parameters: GoogleAIModelRequestParams
   ): Promise<unknown> {
+    // DEBUG: Log labels being passed to formatData
+    console.log(`🔍 [DEBUG] formatData - Platform: ${this.platform}, Labels:`, parameters.labels);
+
     // Labels are now supported on both Vertex AI and Gemini API platforms
-    return this.api.formatData(input, parameters);
+    const result = await this.api.formatData(input, parameters);
+
+    // DEBUG: Log the formatted result to see if labels are included
+    console.log(`🔍 [DEBUG] formatData result - Platform: ${this.platform}, Has labels:`,
+      result && typeof result === 'object' && 'labels' in result ? 'YES' : 'NO');
+    if (result && typeof result === 'object' && 'labels' in result) {
+      console.log(`🔍 [DEBUG] formatData result labels:`, (result as any).labels);
+    }
+
+    return result;
   }
 }
 

@@ -1,0 +1,71 @@
+
+> test-custom-labels@1.0.0 test:gemini
+> node tests/test-gemini-labels.js --debug
+
+🚀 Testing Gemini API Custom Metadata Labels
+
+🔍 [DEBUG] Running in debug mode - will show detailed logging
+
+📋 Test 1: Labels on model initialization
+🔍 [DEBUG] Test 1 - Creating Gemini model with labels: {
+  team: 'research',
+  component: 'frontend',
+  environment: 'production',
+  test_type: 'model_init',
+  platform: 'gemini_api'
+}
+🔍 [DEBUG] Model created. Checking properties:
+🔍 [DEBUG] - Model labels property: undefined
+🔍 [DEBUG] - Model model: gemini-2.5-flash
+🔍 [DEBUG] - Model constructor name: ChatGoogleGenerativeAI
+🔍 [DEBUG] Test 1 - About to invoke Gemini with labels: {
+  team: 'research',
+  component: 'frontend',
+  environment: 'production',
+  test_type: 'model_init',
+  platform: 'gemini_api'
+}
+✅ Response: Labels working on Gemini API
+✅ Labels were included in the request
+
+📋 Test 2: Labels via invoke options
+🔍 [DEBUG] Test 2 - About to invoke Gemini with labels via options: {
+  session: 'test-session-456',
+  user: 'test-user-gemini',
+  request_type: 'invoke_options',
+  priority: 'high',
+  platform: 'gemini_api'
+}
+✅ Response: Labels via invoke options working on Gemini
+✅ Labels were included via invoke options
+
+📋 Test 3: Labels override behavior
+✅ Response: Labels override working on Gemini
+✅ Invoke options labels override model labels
+
+📋 Test 4: No labels (edge case)
+✅ Response: No labels test working on Gemini
+✅ Request completed without labels
+
+📋 Test 5: Empty labels object (edge case)
+✅ Response: Empty labels test working on Gemini
+✅ Request completed with empty labels object
+
+📋 Test 6: Complex labels with special characters
+✅ Response: Complex labels test working on Gemini
+✅ Complex labels with special characters working
+
+📋 Test 7: Different Gemini models
+✅ Response: Gemini Pro model test working
+
+✅ Different Gemini model working with labels
+
+🎉 All Gemini API label tests completed successfully!
+📊 Summary:
+   - Labels on model initialization: ✅
+   - Labels via invoke options: ✅
+   - Labels override behavior: ✅
+   - No labels edge case: ✅
+   - Empty labels edge case: ✅
+   - Complex labels: ✅
+   - Different models: ✅

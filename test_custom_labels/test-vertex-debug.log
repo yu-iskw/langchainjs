@@ -1,0 +1,63 @@
+
+> test-custom-labels@1.0.0 test:vertex
+> node tests/test-vertex-ai-labels.js --debug
+
+🚀 Testing Vertex AI Custom Metadata Labels
+
+🔍 [DEBUG] Running in debug mode - will show detailed logging
+
+📋 Test 1: Labels on model initialization
+🔍 [DEBUG] Test 1 - Creating model with labels: {
+  team: 'research',
+  component: 'frontend',
+  environment: 'production',
+  test_type: 'model_init'
+}
+🔍 [DEBUG] Model created. Checking properties:
+🔍 [DEBUG] - Model labels property: undefined
+🔍 [DEBUG] - Model platform: gcp
+🔍 [DEBUG] - Model model: gemini-2.5-flash
+🔍 [DEBUG] - Model constructor name: ChatVertexAI
+🔍 [DEBUG] Test 1 - About to invoke with labels: {
+  team: 'research',
+  component: 'frontend',
+  environment: 'production',
+  test_type: 'model_init'
+}
+✅ Response: Labels working on Vertex AI
+✅ Labels were included in the request
+
+📋 Test 2: Labels via invoke options
+🔍 [DEBUG] Test 2 - About to invoke with labels via options: {
+  session: 'test-session-123',
+  user: 'test-user',
+  request_type: 'invoke_options',
+  priority: 'high'
+}
+✅ Response: Labels via invoke options working
+✅ Labels were included via invoke options
+
+📋 Test 3: Labels override behavior
+✅ Response: Labels override working
+✅ Invoke options labels override model labels
+
+📋 Test 4: No labels (edge case)
+✅ Response: No labels test working
+✅ Request completed without labels
+
+📋 Test 5: Empty labels object (edge case)
+✅ Response: Empty labels test working
+✅ Request completed with empty labels object
+
+📋 Test 6: Complex labels with special characters
+✅ Response: Complex labels test working
+✅ Complex labels with special characters working
+
+🎉 All Vertex AI label tests completed successfully!
+📊 Summary:
+   - Labels on model initialization: ✅
+   - Labels via invoke options: ✅
+   - Labels override behavior: ✅
+   - No labels edge case: ✅
+   - Empty labels edge case: ✅
+   - Complex labels: ✅
